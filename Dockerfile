@@ -7,6 +7,6 @@ RUN micromamba install -y -n base -f /tmp/env.yaml && \
 ENV PROJECT_DIR $HOME/cargo-agent-r
 WORKDIR $PROJECT_DIR
 COPY --chown=$MAMBA_USER:$MAMBA_USER main.py .
-COPY --chown=$MAMBA_USER:$MAMBA_USER cargo_agent_python/* ./cargo_agent_python/
+COPY --chown=$MAMBA_USER:$MAMBA_USER src/* ./src/
 
 CMD ["python", "main.py"]

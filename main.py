@@ -1,7 +1,7 @@
 import time
 import logging
 from watchdog.observers import Observer
-from cargo_agent_python.cargo_agent_event_handler import CargoAgentEventHandler
+from src.cargo_agent_event_handler import CargoAgentEventHandler
 import os
 
 
@@ -23,8 +23,5 @@ def main():
     observer.join()
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
