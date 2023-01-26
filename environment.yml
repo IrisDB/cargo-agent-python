@@ -1,0 +1,9 @@
+name: cargo-agent-python
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - geopandas
+  - movingpandas
+  - watchdog
