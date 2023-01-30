@@ -1,5 +1,4 @@
-# aka 1.2.0-bullseye-slim
-FROM mambaorg/micromamba@sha256:1d05a8a7d88142f8225927756272748bc5feb438c0185de362e98ae5d88bf2f4
+FROM mambaorg/micromamba:1.2.0
 LABEL org.opencontainers.image.authors="us@couchbits.com"
 LABEL org.opencontainers.image.vendor="couchbits GmbH"
 
