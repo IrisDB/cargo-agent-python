@@ -19,8 +19,9 @@ class CargoAgentEventHandler(FileSystemEventHandler):
             if event.src_path == self.output_file_name:
                 if event.event_type == "created" or event.event_type == "modified":
                     logging.info(f'output-file change detected! {event}')
-                    deserialize = self.moving_pandas_analyzer.read(path=event.src_path)
-                    result = self.moving_pandas_analyzer.analyze(data=deserialize)
+                    movingpandas = self.moving_pandas_analyzer.read(path=event.src_path)
+                    geopandas = self.moving_pandas_analyzer.convert(movingpandas=movingpandas)
+                    result = self.moving_pandas_analyzer.analyze(data=geopandas)
                     j = json.dumps(result)
                     print(j)
                     return

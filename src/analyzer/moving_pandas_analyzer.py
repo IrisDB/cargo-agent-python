@@ -1,16 +1,25 @@
 from movingpandas import TrajectoryCollection
 import pandas as pd
+import geopandas as gpd
+import movingpandas as mpd
 import logging
 
 
 class MovingPandasAnalyzer:
 
-    def read(self, path: str) -> pd.DataFrame:
-        pandas = pd.read_pickle(path)
-        logging.info(pandas.info())
-        return pandas
+    def read(self, path: str) -> mpd.TrajectoryCollection:
+        movingpandas = pd.read_pickle(path)
+        logging.info(f'read movingpandas: {movingpandas}')
+        return movingpandas
 
-    def analyze(self, data: pd.DataFrame) -> dict:
+    def convert(self, movingpandas: mpd.TrajectoryCollection) -> gpd.GeoDataFrame:
+        geopandas = movingpandas.to_point_gdf()
+        print(f'From {type(movingpandas)} to {type(geopandas)}')
+        logging.info(geopandas.info())
+        logging.info(geopandas.head())
+        return geopandas
+
+    def analyze(self, data: gpd.GeoDataFrame) -> dict:
         ids = data['individual.local.identifier'].unique().tolist()
         if 'individual.local.identifier' in data:
             names = data['individual.local.identifier'].unique().tolist()
