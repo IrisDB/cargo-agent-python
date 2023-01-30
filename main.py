@@ -11,7 +11,8 @@ def main():
                         datefmt='%Y-%m-%d %H:%M:%S')
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
     listen_on = os.environ.get('OUTPUT_FILE', os.getcwd() + "/data/raw/sample_2-animals_output.pickle")
-    event_handler = CargoAgentEventHandler(output_file_name=listen_on)
+    write_to = os.environ.get('LAST_ANALYZED_FILE', os.getcwd() + "/data/raw/result.json")
+    event_handler = CargoAgentEventHandler(output_file_name=listen_on, result_json_file_name=write_to)
     observer = Observer()
     observer.schedule(event_handler, os.path.dirname(listen_on), recursive=False)
     observer.start()

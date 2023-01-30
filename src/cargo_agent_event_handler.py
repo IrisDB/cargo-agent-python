@@ -6,10 +6,11 @@ from src.analyzer.moving_pandas_analyzer import MovingPandasAnalyzer
 
 class CargoAgentEventHandler(FileSystemEventHandler):
 
-    def __init__(self, output_file_name):
+    def __init__(self, output_file_name, result_json_file_name):
         super().__init__()
         logging.info(f'init for {output_file_name}')
         self.output_file_name = output_file_name
+        self.result_file_name = result_json_file_name
         self.moving_pandas_analyzer = MovingPandasAnalyzer()
 
     def on_any_event(self, event):
@@ -24,5 +25,7 @@ class CargoAgentEventHandler(FileSystemEventHandler):
                     result = self.moving_pandas_analyzer.analyze(data=geopandas)
                     j = json.dumps(result)
                     print(j)
+                    with open(self.result_file_name, "w") as result_json_file:
+                        result_json_file.write(j)
                     return
         logging.debug(f'skipping {event}')
