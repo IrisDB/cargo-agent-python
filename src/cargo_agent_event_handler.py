@@ -1,5 +1,6 @@
 from watchdog.events import FileSystemEventHandler
 import logging
+import json
 from src.analyzer.moving_pandas_analyzer import MovingPandasAnalyzer
 
 
@@ -18,6 +19,9 @@ class CargoAgentEventHandler(FileSystemEventHandler):
             if event.src_path == self.output_file_name:
                 if event.event_type == "created" or event.event_type == "modified":
                     logging.info(f'output-file change detected! {event}')
-                    self.moving_pandas_analyzer.analyze(path=event.src_path)
+                    deserialize = self.moving_pandas_analyzer.read(path=event.src_path)
+                    result = self.moving_pandas_analyzer.analyze(data=deserialize)
+                    j = json.dumps(result)
+                    print(j)
                     return
         logging.debug(f'skipping {event}')

@@ -10,7 +10,7 @@ def main():
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    listen_on = os.environ.get('OUTPUT_FILE', os.getcwd() + "/data/raw/sample_output.pickle")
+    listen_on = os.environ.get('OUTPUT_FILE', os.getcwd() + "/data/raw/sample_2-animals_output.pickle")
     event_handler = CargoAgentEventHandler(output_file_name=listen_on)
     observer = Observer()
     observer.schedule(event_handler, os.path.dirname(listen_on), recursive=False)
