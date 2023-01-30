@@ -11,5 +11,6 @@ ENV PROJECT_DIR $HOME/cargo-agent-r
 WORKDIR $PROJECT_DIR
 COPY --chown=$MAMBA_USER:$MAMBA_USER main.py .
 COPY --chown=$MAMBA_USER:$MAMBA_USER src/* ./src/
+COPY --chown=$MAMBA_USER:$MAMBA_USER src/analyzer/* ./src/analyzer/
 
 CMD ["python", "main.py"]
