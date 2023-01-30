@@ -1,5 +1,5 @@
-# aka 1.2.0-jammy
-FROM mambaorg/micromamba@sha256:5254e13db25eef59b6e2248ec02e8adfb82fd48cc23c6f92df648d8f0bc94cd8
+# aka 1.2.0-bullseye-slim
+FROM mambaorg/micromamba@sha256:1d05a8a7d88142f8225927756272748bc5feb438c0185de362e98ae5d88bf2f4
 LABEL org.opencontainers.image.authors="us@couchbits.com"
 LABEL org.opencontainers.image.vendor="couchbits GmbH"
 
