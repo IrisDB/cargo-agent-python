@@ -7,6 +7,11 @@ import logging
 
 class MovingPandasAnalyzer:
 
+    def analyze(self, path: str) -> dict:
+        movingpandas = self.read(path=path)
+        geopandas = self.convert(movingpandas=movingpandas)
+        return self.inspect(data=geopandas)
+
     def read(self, path: str) -> mpd.TrajectoryCollection:
         movingpandas = pd.read_pickle(path)
         logging.info(f'read movingpandas: {movingpandas}')
@@ -19,7 +24,7 @@ class MovingPandasAnalyzer:
         logging.info(geopandas.head())
         return geopandas
 
-    def analyze(self, data: gpd.GeoDataFrame) -> dict:
+    def inspect(self, data: gpd.GeoDataFrame) -> dict:
         ids = data['individual.local.identifier'].unique().tolist()
         if 'individual.local.identifier' in data:
             names = data['individual.local.identifier'].unique().tolist()
