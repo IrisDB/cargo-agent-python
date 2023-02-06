@@ -37,6 +37,7 @@ class MovingPandasAnalyzer(BaseAnalyzer):
             taxa = "no appropriate taxa names available"
 
         return {
+            "animals_total_number": len(ids),
             "animal_names": names,
             "taxa": taxa,
             "track_names": ids
