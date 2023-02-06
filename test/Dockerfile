@@ -13,4 +13,4 @@ COPY --chown=$MAMBA_USER:$MAMBA_USER main.py .
 COPY --chown=$MAMBA_USER:$MAMBA_USER src/ ./src/
 COPY --chown=$MAMBA_USER:$MAMBA_USER test/ ./test/
 
-RUN ["conda", "run", "--no-capture-output", "-n", "base", "python", "-m", "unittest"]
+RUN ["micromamba", "run", "--no-capture-output", "-n", "base", "python", "-m", "unittest"]
