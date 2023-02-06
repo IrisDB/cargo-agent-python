@@ -1,30 +1,31 @@
-from movingpandas import TrajectoryCollection
+from src.analyzer.base_analyzer import BaseAnalyzer
+
 import pandas as pd
 import geopandas as gpd
 import movingpandas as mpd
 import logging
 
 
-class MovingPandasAnalyzer:
+class MovingPandasAnalyzer(BaseAnalyzer):
 
     def analyze(self, path: str) -> dict:
-        movingpandas = self.read(path=path)
-        geopandas = self.convert(movingpandas=movingpandas)
-        return self.inspect(data=geopandas)
+        movingpandas = self.__read(path=path)
+        geopandas = self.__convert(movingpandas=movingpandas)
+        return self.__inspect(data=geopandas)
 
-    def read(self, path: str) -> mpd.TrajectoryCollection:
+    def __read(self, path: str) -> mpd.TrajectoryCollection:
         movingpandas = pd.read_pickle(path)
         logging.info(f'read movingpandas: {movingpandas}')
         return movingpandas
 
-    def convert(self, movingpandas: mpd.TrajectoryCollection) -> gpd.GeoDataFrame:
+    def __convert(self, movingpandas: mpd.TrajectoryCollection) -> gpd.GeoDataFrame:
         geopandas = movingpandas.to_point_gdf()
         print(f'From {type(movingpandas)} to {type(geopandas)}')
         logging.info(geopandas.info())
         logging.info(geopandas.head())
         return geopandas
 
-    def inspect(self, data: gpd.GeoDataFrame) -> dict:
+    def __inspect(self, data: gpd.GeoDataFrame) -> dict:
         ids = data['individual.local.identifier'].unique().tolist()
         if 'individual.local.identifier' in data:
             names = data['individual.local.identifier'].unique().tolist()

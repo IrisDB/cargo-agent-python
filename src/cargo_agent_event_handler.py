@@ -29,11 +29,11 @@ class CargoAgentEventHandler(FileSystemEventHandler):
                 if event.event_type == "created" or event.event_type == "modified":
                     logging.info(f'output-file change detected! {event}')
                     result = self.analyzer.analyze(path=event.src_path)
-                    self.write_result(result=result)
+                    self.__write_result(result=result)
                     return
         logging.debug(f'skipping {event}')
 
-    def write_result(self, result: dict) -> None:
+    def __write_result(self, result: dict) -> None:
         j = json.dumps(result)
         logging.info(f'result: {j}')
         with open(self.result_file_name, "w") as result_json_file:
