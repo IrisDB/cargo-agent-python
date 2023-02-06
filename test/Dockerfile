@@ -13,4 +13,4 @@ COPY --chown=$MAMBA_USER:$MAMBA_USER main.py .
 COPY --chown=$MAMBA_USER:$MAMBA_USER src/ ./src/
 COPY --chown=$MAMBA_USER:$MAMBA_USER test/ ./test/
 
-CMD ["python", "-m", "unittest"]
+RUN ["python", "-m", "unittest"]
