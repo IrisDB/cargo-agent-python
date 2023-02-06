@@ -1,3 +1,6 @@
+name: test
+run-name: tests for ${{ github.branch }}
+on: [push]
 jobs:
   test:
     name: Unit tests
