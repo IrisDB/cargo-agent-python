@@ -3,8 +3,8 @@ import os
 from watchdog.events import FileSystemEventHandler
 import logging
 import json
-from src.analyzer.moving_pandas_analyzer import MovingPandasAnalyzer
-from src.analyzer.void_analyzer import VoidAnalyzer
+from src.analyzer.moving_pandas_trajectory_collection.analyzer import MovingPandasAnalyzer
+from src.analyzer.void.analyzer import VoidAnalyzer
 
 
 class CargoAgentEventHandler(FileSystemEventHandler):

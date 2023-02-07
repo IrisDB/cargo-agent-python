@@ -1,6 +1,6 @@
 import os.path
 from unittest import TestCase
-from src.analyzer.moving_pandas_analyzer import MovingPandasAnalyzer
+from src.analyzer.moving_pandas_trajectory_collection.analyzer import MovingPandasAnalyzer
 from test.config.definitions import ROOT_DIR
 
 
@@ -50,4 +50,4 @@ class TestMovingPandasAnalyzer(TestCase):
         self.assertEqual(actual['track_names'], ['Goat-8810'])
 
     def __test_file(self, file_name) -> str:
-        return os.path.join(ROOT_DIR, 'test', 'resources', file_name)
+        return os.path.join(ROOT_DIR, 'test', 'resources', 'moving_pandas_trajectory_collection', file_name)

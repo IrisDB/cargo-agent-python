@@ -21,7 +21,7 @@ Please do not work on our master branch, but fork the repository and add files t
 
 ### 2. Add analysis code for the IO type overview
 
-Location: `src/analyzer/{io_type_label}.py`
+Location: `src/analyzer/{io_type_label}/analyzer.py`
 
 Implement code by extending the base class `src/analyzer/base_analyzer.py` to extract a useful list of overview properties of your new IO type. Make sure that a proper list of useful information is created by your code (with useful keys). At the end this list will be serialized by `json` and presented to any MoveApps user that runs Apps of this new IO (output) type in a workflow.
 
@@ -113,13 +113,13 @@ Implement code by extending the base class `src/analyzer/base_analyzer.py` to ex
 
 ### 3. Add test input data of the requested IO type
 
-Location: `test/resources/{io_type_label}/{io_type_label}.{io_file_extension}`
+Location: `test/resources/{io_type_label}/{file_name}.{io_file_extension}`
 
 Example data of a new IO type are useful to understand their uses and properties. Provide 2-3 example files that properly work with your cargo agent analyser code.
 
 ### 4. Add unit tests
 
-Location: `test/analyzer/test_{io_type_label}_analyzer.py`
+Location: `test/analyzer/{io_type_label}/test_analyzer.py`
 
 Unit tests ensure that edge cases are considered sufficiently by open code like the cargo agent of a new IO type. This code needs to run properly, as it is used within the MoveApps system each time an App with the respective IO type as output is run. Please include unit tests for all simple edge cases. If you are unsure, have a look at test files of other IO types.
 
