@@ -1,3 +1,6 @@
+resources/result
+!resources/result/.keep
+
 # Created by https://www.toptal.com/developers/gitignore/api/python,r,intellij,macos,windows,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,r,intellij,macos,windows,visualstudiocode
 
@@ -417,5 +420,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/python,r,intellij,macos,windows,visualstudiocode
-
-x-archive/
