@@ -1,5 +1,5 @@
 import os
-
+import shutil
 from watchdog.events import FileSystemEventHandler
 import logging
 import json
@@ -9,12 +9,13 @@ from src.analyzer.void.analyzer import VoidAnalyzer
 
 class CargoAgentEventHandler(FileSystemEventHandler):
 
-    def __init__(self, output_file_name, result_json_file_name, dev_analyze_file_type):
+    def __init__(self, output_file_name, result_json_file_name, analyze_file_type, working_copy):
         super().__init__()
         logging.info(f'init for {output_file_name}')
         self.output_file_name = output_file_name
         self.result_file_name = result_json_file_name
-        output_type_to_analyze = os.environ.get('OUTPUT_TYPE', dev_analyze_file_type)
+        self.my_working_copy = working_copy
+        output_type_to_analyze = analyze_file_type
         match output_type_to_analyze:
             case "MovingPandas.TrajectoryCollection":
                 self.analyzer = MovingPandasAnalyzer()
@@ -28,7 +29,8 @@ class CargoAgentEventHandler(FileSystemEventHandler):
             if event.src_path == self.output_file_name:
                 if event.event_type == "created" or event.event_type == "modified":
                     logging.info(f'output-file change detected! {event}')
-                    result = self.analyzer.analyze(path=event.src_path)
+                    shutil.copy2(event.src_path, self.my_working_copy)
+                    result = self.analyzer.analyze(path=self.my_working_copy)
                     self.__write_result(result=result)
                     return
         logging.debug(f'skipping {event}')
