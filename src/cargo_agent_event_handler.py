@@ -39,7 +39,8 @@ class CargoAgentEventHandler(FileSystemEventHandler):
                         return
             logging.debug(f'skipping {event}')
         except:
-            logging.error(f'An exception occurred! {traceback.format_exc()}')
+            logging.error(f'An exception occurred! Entering fail-safe mode.. {traceback.format_exc()}')
+            self.__write_result(VoidAnalyzer().analyze(path=self.my_working_copy))
 
     def __write_result(self, result: dict) -> None:
         j = json.dumps(result)
