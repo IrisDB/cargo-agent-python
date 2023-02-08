@@ -1,5 +1,7 @@
 import os
 import shutil
+import traceback
+
 from watchdog.events import FileSystemEventHandler
 import logging
 import json
@@ -20,20 +22,24 @@ class CargoAgentEventHandler(FileSystemEventHandler):
             case "MovingPandas.TrajectoryCollection":
                 self.analyzer = MovingPandasAnalyzer()
             case _:
+                logging.warning(f'Using fallback analyzer. Don\'t know \'{output_type_to_analyze}\'')
                 self.analyzer = VoidAnalyzer()
 
     def on_any_event(self, event):
         super().on_any_event(event)
 
-        if not event.is_directory:
-            if event.src_path == self.output_file_name:
-                if event.event_type == "created" or event.event_type == "modified":
-                    logging.info(f'output-file change detected! {event}')
-                    shutil.copy2(event.src_path, self.my_working_copy)
-                    result = self.analyzer.analyze(path=self.my_working_copy)
-                    self.__write_result(result=result)
-                    return
-        logging.debug(f'skipping {event}')
+        try:
+            if not event.is_directory:
+                if event.src_path == self.output_file_name:
+                    if event.event_type == "created" or event.event_type == "modified":
+                        logging.info(f'output-file change detected! {event}')
+                        shutil.copy2(event.src_path, self.my_working_copy)
+                        result = self.analyzer.analyze(path=self.my_working_copy)
+                        self.__write_result(result=result)
+                        return
+            logging.debug(f'skipping {event}')
+        except:
+            logging.error(f'An exception occurred! {traceback.format_exc()}')
 
     def __write_result(self, result: dict) -> None:
         j = json.dumps(result)
