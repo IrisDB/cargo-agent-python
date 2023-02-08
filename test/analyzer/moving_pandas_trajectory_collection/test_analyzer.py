@@ -49,5 +49,12 @@ class TestMovingPandasAnalyzer(TestCase):
         self.assertEqual(actual['taxa'], ['Capra hircus'])
         self.assertEqual(actual['track_names'], ['Goat-8810'])
 
+    def test_it_should_handle_empty_input(self):
+        # execute
+        actual = self.sut.analyze(path=self.__test_file("empty.pickle"))
+
+        # verify
+        self.assertEqual(actual['animals_total_number'], 0)
+
     def __test_file(self, file_name) -> str:
         return os.path.join(ROOT_DIR, 'test', 'resources', 'moving_pandas_trajectory_collection', file_name)
