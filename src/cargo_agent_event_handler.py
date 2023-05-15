@@ -21,7 +21,7 @@ class CargoAgentEventHandler(FileSystemEventHandler):
         # is it possible to "find" the right analyzer class only based on the slug?
         # we should avoid to add a new `case` for every introduced IO type
         match output_type_slug_to_analyze:
-            case "MovingPandas.TrajectoryCollection":
+            case "moving_pandas_trajectory_collection":
                 self.analyzer = MovingPandasAnalyzer()
             case _:
                 logging.warning(f'Using fallback analyzer. Don\'t know \'{output_type_slug_to_analyze}\'')
