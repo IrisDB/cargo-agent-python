@@ -5,7 +5,7 @@ from src.cargo_agent_event_handler import CargoAgentEventHandler
 import os
 
 dev_analyze_file: str = os.getcwd() + "/resources/raw/input2.pickle"
-dev_analyze_file_type: str = "MovingPandas.TrajectoryCollection"
+dev_analyze_file_type_slug: str = "moving_pandas_trajectory_collection"
 dev_result_file: str = os.getcwd() + "/resources/result/result.json"
 dev_working_copy: str = os.getcwd() + "/resources/result/working_copy"
 
@@ -21,7 +21,7 @@ def main():
     event_handler = CargoAgentEventHandler(
         output_file_name=listen_on,
         result_json_file_name=os.environ.get('OUTPUT_FILE_CARGO_AGENT_PYTHON', dev_result_file),
-        analyze_file_type=os.environ.get('OUTPUT_TYPE', dev_analyze_file_type),
+        analyze_file_type_slug=os.environ.get('OUTPUT_TYPE_SLUG', dev_analyze_file_type_slug),
         working_copy=os.environ.get('OUTPUT_WORKING_COPY_FILE', dev_working_copy)
     )
     observer = Observer()
