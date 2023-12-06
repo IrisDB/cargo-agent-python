@@ -12,8 +12,11 @@ dev_working_copy: str = os.getcwd() + "/resources/result/working_copy"
 
 def main():
     logging.basicConfig(
-        level=os.environ.get('LOG_LEVEL_CARGO_AGENT_PYTHON', "INFO"),
-        format='%(asctime)s %(relativeCreated)6d [%(threadName)s] %(name)s %(levelname)s: %(message)s',
+        level=os.environ.get('LOG_LEVEL_CARGO_AGENT_PYTHON', 'INFO'),
+        format=os.environ.get(
+            'LOG_PATTERN_CARGO_AGENT_PYTHON',
+            '%(asctime)s.%(msecs)03d %(relativeCreated)6d [%(threadName)s] %(name)s %(levelname)s: %(message)s'
+        ),
         datefmt='%Y-%m-%d %H:%M:%S'
     )
     # path = sys.argv[1] if len(sys.argv) > 1 else '.'
