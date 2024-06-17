@@ -47,7 +47,8 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         track_names = data[traj_id_col].unique().tolist()
         tracks_total_number = len(track_names)
 
-        number_positions_by_track = data.dissolve(by=traj_id_col, aggfunc={traj_id_col: "count"}).drop("geometry", axis=1)
+        geom_col = movingpandas.get_geom_col()
+        number_positions_by_track = data.dissolve(by=traj_id_col, aggfunc={traj_id_col: "count"}).drop(geom_col, axis=1).rename(columns={traj_id_col: "count"}).reset_index().values.tolist()
 
         projection = movingpandas.get_crs()
 
@@ -58,7 +59,7 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         if 'individual-local-identifier' in data:
             animal_names = data['individual.local.identifier'].unique().tolist()
             animals_total_number=len(animal_names)
-        elif 'individual_local_identfier' in data:
+        elif 'individual_local_identifier' in data:
             animal_names = data['individual_local_identifier'].unique().tolist()
             animals_total_number=len(animal_names)
         else:
@@ -84,6 +85,10 @@ class MovingPandasAnalyzer(BaseAnalyzer):
             taxa = data['individual-taxon-canonical-name'].unique().tolist()
         elif 'individual_taxon_canonical_name' in data:
             taxa = data['individual_taxon_canonical_name'].unique().tolist()
+        elif 'taxon-canonical-name' in data:
+            taxa = data['taxon-canonical-name'].unique().tolist()
+        elif 'taxon_canonical_name' in data:
+            taxa = data['taxon_canonical_name'].unique().tolist()
         else:
             taxa = "no appropriate taxa names available"
 
