@@ -16,9 +16,8 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         if geopandas is not None:
             return self.__inspect(data=geopandas, movingpandas=movingpandas)
         else:
-            print("animals_total_number: 0")
             return {
-                "animals_total_number": 0
+                "n": "empty-result"
             }
 
     def __read(self, path: str) -> mpd.TrajectoryCollection:
@@ -28,7 +27,7 @@ class MovingPandasAnalyzer(BaseAnalyzer):
 
     def __convert(self, movingpandas: mpd.TrajectoryCollection) -> GeoDataFrame | None:
         if len(movingpandas.trajectories) > 0:
-            # Converting to geopandas is only possible if at least 1 trajectory is present"
+            # Converting to geopandas is only possible if at least 1 trajectory is present
             geopandas = movingpandas.to_point_gdf()
             print(f'From {type(movingpandas)} to {type(geopandas)}')
             logging.info(geopandas.info())
@@ -38,9 +37,11 @@ class MovingPandasAnalyzer(BaseAnalyzer):
             return None
 
     def __inspect(self, data: gpd.GeoDataFrame, movingpandas: mpd.TrajectoryCollection) -> dict:
-        
-        positions_total_number = len(data)
 
+        n = "non-empty-result"
+
+        positions_total_number = len(data)
+        
         timestamps_range = [str(data.index.min()),str(data.index.max())]
 
         traj_id_col = movingpandas.get_traj_id_col()
@@ -48,11 +49,13 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         tracks_total_number = len(track_names)
 
         geom_col = movingpandas.get_geom_col()
-        number_positions_by_track = data.dissolve(by=traj_id_col, aggfunc={traj_id_col: "count"}).drop(geom_col, axis=1).rename(columns={traj_id_col: "count"}).reset_index().values.tolist()
+        number_positions_by_track = dict(data.dissolve(by=traj_id_col, aggfunc={traj_id_col: "count"}).drop(geom_col, axis=1).rename(columns={traj_id_col: "count"}).reset_index().values)
 
         projection = movingpandas.get_crs()
 
-        positions_bounding_box = data.total_bounds.tolist()
+        #positions_bounding_box = data.total_bounds.tolist()
+        positions_bounding_box = data.total_bounds
+        positions_bounding_box = dict({"x_min": positions_bounding_box[0], "y_min": positions_bounding_box[1], "x_max": positions_bounding_box[2], "y_max": positions_bounding_box[3]})
 
         track_attributes = data.columns.tolist()
 
@@ -95,15 +98,16 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         return {
             "positions_total_number": positions_total_number,
             "timestamps_range": timestamps_range,
+            "animals_total_number": animals_total_number,
+            "animal_names": animal_names,
+            "taxa": taxa,
+            "sensor_types": sensor_types,
+            "positions_bounding_box": positions_bounding_box,
+            "projection": projection,
             "tracks_total_number": tracks_total_number,
             "track_names": track_names,
             "number_positions_by_track": number_positions_by_track,
-            "projection": projection,
-            "positions_bounding_box": positions_bounding_box,
-            "track_attributes": track_attributes,
-            "animals_total_number": animals_total_number,
-            "animal_names": animal_names,
-            "sensor_types": sensor_types,
-            "taxa": taxa
+            "data_attributes": track_attributes,
+            "n": n
         }
 
