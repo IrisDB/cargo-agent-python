@@ -53,7 +53,9 @@ class MovingPandasAnalyzer(BaseAnalyzer):
 
         projection = movingpandas.get_crs()
 
-        positions_bounding_box = data.total_bounds.tolist()
+        #positions_bounding_box = data.total_bounds.tolist()
+        positions_bounding_box = data.total_bounds
+        positions_bounding_box = dict({"x_min": positions_bounding_box[0], "y_min": positions_bounding_box[1], "x_max": positions_bounding_box[2], "y_max": positions_bounding_box[3]})
 
         track_attributes = data.columns.tolist()
 
