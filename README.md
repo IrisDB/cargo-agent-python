@@ -146,3 +146,11 @@ After you have created a pull request to our GitHub repository, our administrato
 ### 8. Request the new IO type on MoveApps
 
 With the pull request link from above, you are able to request the IO type on MoveApps. This can be done during _initialization_ of a new App at MoveApps and following the link for _requesting a new IO type_. You need the information from the _first step of this document (Preparation)_ and the link to your _Pull Request_.
+
+## How to run the complete cargo-agent locally (e2e)
+
+1. Open `main.py` and adjust `dev_analyze_file`. This file will be analyzed.
+2. Run `main.py`
+3. The cargo-agent listens now to an added or modified file named by 1.: `INFO: init for /opt/couchbits/projects/max-planck-gesellschaft/moveapps/apps/cargo-agent-python/resources/raw/input2_LatLon.pickle`
+4. Now insert or modify this file (eg. by `touch resources/raw/input2_LatLon.pickle`): `INFO: output-file change detected!`
+5. The result json file content will be printed and persisted in `resources/result/result.json`
