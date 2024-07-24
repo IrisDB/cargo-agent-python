@@ -38,87 +38,152 @@ Implement code by extending the base class `src/analyzer/base_analyzer.py` to ex
 <details>
     <summary>An example output of a (serialized json) list</summary>
 
-    ```
+```
+[
     {
-        "sensor_types":[
-            "GPS"
-        ],
-        "taxa":[
-            "Anser albifrons"
-        ],
-        "animals_total_number": 2,
-        "animal_attributes":[
-            "individual.local.identifier",
-            "visible",
-            "individual.id",
-            "deployment.id",
-            "tag.id",
-            "study.id",
-            "sensor.type.id",
-            "tag.local.identifier",
-            "individual.taxon.canonical.name",
-            "study.name",
-            "sensor.type",
-            "sex",
-            "taxon.canonical.name",
-            "timestamp.start",
-            "timestamp.end",
-            "number.of.events",
-            "number.of.deployments",
-            "sensor.type.ids",
-            "animalName"
-        ],
-        "positions_total_number":4653,
-        "track_attributes":[
-            "event.id",
-            "timestamp",
-            "location.long",
-            "location.lat",
-            "heading",
-            "height.above.ellipsoid",
-            "migration.stage",
-            "migration.stage.standard"
-        ],
-        "timestamps_range":[
-            "2013-09-30 08:30:48",
-            "2014-10-25 08:30:44"
-        ],
-        "animal_names":[
-            "2704",
-            "2731"
-        ],
-        "positions_bounding_box":[
-            {
-                "min":6.2172,
-                "max":39.4644,
-                "_row":"coords.x1"
-            },
-            {
-                "min":51.4005,
-                "max":63.9659,
-                "_row":"coords.x2"
-            }
-        ],
-        "tracks_total_number":2,
-        "projection":[
-            "+proj=longlat +datum=WGS84 +no_defs"
-        ],
-        "track_names":[
-            "X2704",
-            "X2731"
-        ],
-        "number_positions_by_track":[
-            {
-                "positions_number":706,
-                "animal":"X2704"
-            },
-            {
-                "positions_number":3947,
-                "animal":"X2731"
-            }
+        "positions_total_number": 3243
+    },
+    {
+        "timestamps_range": [
+            "2021-07-01 06:40:00",
+            "2022-03-15 14:13:00"
         ]
+    },
+    {
+        "animals_total_number": 1
+    },
+    {
+        "animal_names": [
+            "Goat-8810"
+        ]
+    },
+    {
+        "taxa": [
+            "Capra hircus"
+        ]
+    },
+    {
+        "sensor_types": [
+            "GPS"
+        ]
+    },
+    {
+        "positions_bounding_box": {
+            "x_min": 14.9216333333333,
+            "y_min": 37.8303666666667,
+            "x_max": 14.9606333333333,
+            "y_max": 37.8717833333333
+        }
+    },
+    {
+        "projection": "EPSG:4326"
+    },
+    {
+        "tracks_total_number": 1
+    },
+    {
+        "track_names": [
+            "Goat.8810..deploy_id.1600804509."
+        ]
+    },
+    {
+        "number_positions_by_track": {
+            "Goat.8810..deploy_id.1600804509.": 3243
+        }
+    },
+    {
+        "data_attributes": [
+            "sensor_type_id",
+            "comments",
+            "data_decoding_software",
+            "gps_horizontal_accuracy_estimate",
+            "gps_speed_accuracy_estimate",
+            "gps_time_to_fix",
+            "ground_speed",
+            "heading",
+            "height_above_ellipsoid",
+            "icarus_ecef_vx",
+            "icarus_ecef_vy",
+            "icarus_ecef_vz",
+            "icarus_ecef_x",
+            "icarus_ecef_y",
+            "icarus_ecef_z",
+            "icarus_reset_counter",
+            "icarus_timestamp_accuracy",
+            "icarus_timestamp_source",
+            "icarus_uplink_counter",
+            "import_marked_outlier",
+            "location_error_text",
+            "manually_marked_outlier",
+            "mortality_status",
+            "sequence_number",
+            "sigfox_rssi",
+            "tag_voltage",
+            "timestamp",
+            "transmission_protocol",
+            "transmission_timestamp",
+            "event_id",
+            "visible",
+            "individual_name_deployment_id",
+            "deployment_id",
+            "tag_id",
+            "individual_id",
+            "animal_life_stage",
+            "animal_reproductive_condition",
+            "attachment_type",
+            "deploy_off_timestamp",
+            "deploy_on_person",
+            "deploy_on_timestamp",
+            "sensor_type_ids",
+            "capture_location",
+            "deploy_on_location",
+            "deploy_off_location",
+            "nick_name",
+            "ring_id",
+            "sex",
+            "taxon_canonical_name",
+            "individual_number_of_deployments",
+            "mortality_location",
+            "tag_local_identifier",
+            "tag_number_of_deployments",
+            "study_id",
+            "acknowledgements",
+            "citation",
+            "grants_used",
+            "has_quota",
+            "i_am_owner",
+            "is_test",
+            "license_terms",
+            "license_type",
+            "name",
+            "study_number_of_deployments",
+            "number_of_individuals",
+            "number_of_tags",
+            "principal_investigator_name",
+            "study_objective",
+            "study_type",
+            "suspend_license_terms",
+            "i_can_see_data",
+            "there_are_data_which_i_cannot_see",
+            "i_have_download_access",
+            "i_am_collaborator",
+            "study_permission",
+            "timestamp_first_deployed_location",
+            "timestamp_last_deployed_location",
+            "number_of_deployed_locations",
+            "taxon_ids",
+            "contact_person_name",
+            "main_location",
+            "individual_local_identifier",
+            "timestamp_tz",
+            "geometry"
+        ]
+    },
+    {
+        "n": "non-empty-result"
     }
-    ```
+]
+```
 </details>
 
 ### 4. Add documentation about the requested IO type
