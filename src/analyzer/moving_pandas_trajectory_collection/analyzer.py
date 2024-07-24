@@ -17,7 +17,9 @@ class MovingPandasAnalyzer(BaseAnalyzer):
             return self.__inspect(data=geopandas, movingpandas=movingpandas)
         else:
             return [{
-                "n": "empty-result"
+                # The field `n` is special and expects its value of type array.
+                # MoveApps should simply that in the future.
+                "n": ["empty-result"]
             }]
 
     def __read(self, path: str) -> mpd.TrajectoryCollection:
@@ -38,7 +40,9 @@ class MovingPandasAnalyzer(BaseAnalyzer):
 
     def __inspect(self, data: gpd.GeoDataFrame, movingpandas: mpd.TrajectoryCollection) -> list:
 
-        n = "non-empty-result"
+        # The field `n` is special and expects its value of type array.
+        # MoveApps should simply that in the future.
+        n = ["non-empty-result"]
 
         positions_total_number = len(data)
         

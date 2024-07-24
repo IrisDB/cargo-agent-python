@@ -180,7 +180,9 @@ Implement code by extending the base class `src/analyzer/base_analyzer.py` to ex
         ]
     },
     {
-        "n": "non-empty-result"
+        "n": [
+            "non-empty-result"
+        ]
     }
 ]
 ```
