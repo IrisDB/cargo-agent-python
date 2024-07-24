@@ -100,18 +100,18 @@ class MovingPandasAnalyzer(BaseAnalyzer):
             taxa = "no appropriate taxa names available"
 
         return [
-            {"positions_total_number": positions_total_number},
+            {"positions_total_number": positions_total_number},  # 0
             {"timestamps_range": timestamps_range},
-            {"animals_total_number": animals_total_number},
+            {"animals_total_number": animals_total_number},  # 2
             {"animal_names": animal_names},
-            {"taxa": taxa},
+            {"taxa": taxa},  # 4
             {"sensor_types": sensor_types},
-            {"positions_bounding_box": positions_bounding_box},
+            {"positions_bounding_box": positions_bounding_box},  # 6
             {"projection": projection},
-            {"tracks_total_number": tracks_total_number},
+            {"tracks_total_number": tracks_total_number},  # 8
             {"track_names": track_names},
-            {"number_positions_by_track": number_positions_by_track},
+            {"number_positions_by_track": number_positions_by_track},  # 10
             {"data_attributes": track_attributes},
-            {"n": n},
+            {"n": n},  # 12
         ]
 
