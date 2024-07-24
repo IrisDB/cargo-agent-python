@@ -4,7 +4,7 @@ from watchdog.observers import Observer
 from src.cargo_agent_event_handler import CargoAgentEventHandler
 import os
 
-dev_analyze_file: str = os.getcwd() + "/resources/raw/input2.pickle"
+dev_analyze_file: str = os.getcwd() + "/resources/raw/input1_LatLon.pickle"
 dev_analyze_file_type_slug: str = "moving_pandas_trajectory_collection"
 dev_result_file: str = os.getcwd() + "/resources/result/result.json"
 dev_working_copy: str = os.getcwd() + "/resources/result/working_copy"

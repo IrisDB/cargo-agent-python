@@ -10,15 +10,17 @@ import logging
 
 class MovingPandasAnalyzer(BaseAnalyzer):
 
-    def analyze(self, path: str) -> dict:
+    def analyze(self, path: str) -> list:
         movingpandas = self.__read(path=path)
         geopandas = self.__convert(movingpandas=movingpandas)
         if geopandas is not None:
             return self.__inspect(data=geopandas, movingpandas=movingpandas)
         else:
-            return {
-                "n": "empty-result"
-            }
+            return [{
+                # The field `n` is special and expects its value of type array.
+                # MoveApps should simply that in the future.
+                "n": ["empty-result"]
+            }]
 
     def __read(self, path: str) -> mpd.TrajectoryCollection:
         movingpandas = pd.read_pickle(path)
@@ -36,9 +38,11 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         else:
             return None
 
-    def __inspect(self, data: gpd.GeoDataFrame, movingpandas: mpd.TrajectoryCollection) -> dict:
+    def __inspect(self, data: gpd.GeoDataFrame, movingpandas: mpd.TrajectoryCollection) -> list:
 
-        n = "non-empty-result"
+        # The field `n` is special and expects its value of type array.
+        # MoveApps should simply that in the future.
+        n = ["non-empty-result"]
 
         positions_total_number = len(data)
         
@@ -95,19 +99,19 @@ class MovingPandasAnalyzer(BaseAnalyzer):
         else:
             taxa = "no appropriate taxa names available"
 
-        return {
-            "positions_total_number": positions_total_number,
-            "timestamps_range": timestamps_range,
-            "animals_total_number": animals_total_number,
-            "animal_names": animal_names,
-            "taxa": taxa,
-            "sensor_types": sensor_types,
-            "positions_bounding_box": positions_bounding_box,
-            "projection": projection,
-            "tracks_total_number": tracks_total_number,
-            "track_names": track_names,
-            "number_positions_by_track": number_positions_by_track,
-            "data_attributes": track_attributes,
-            "n": n
-        }
+        return [
+            {"positions_total_number": positions_total_number},  # 0
+            {"timestamps_range": timestamps_range},
+            {"animals_total_number": animals_total_number},  # 2
+            {"animal_names": animal_names},
+            {"taxa": taxa},  # 4
+            {"sensor_types": sensor_types},
+            {"positions_bounding_box": positions_bounding_box},  # 6
+            {"projection": projection},
+            {"tracks_total_number": tracks_total_number},  # 8
+            {"track_names": track_names},
+            {"number_positions_by_track": number_positions_by_track},  # 10
+            {"data_attributes": track_attributes},
+            {"n": n},  # 12
+        ]
 
